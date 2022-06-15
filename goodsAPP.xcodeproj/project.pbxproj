@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4BF392C0285074C6007ECE05 /* goods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF392BF285074C6007ECE05 /* goods.swift */; };
 		A482F769272927EC00F9BFA9 /* hensyuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482F768272927EC00F9BFA9 /* hensyuViewController.swift */; };
 		A4D8C6F2271FEC5A003A7521 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D8C6F1271FEC5A003A7521 /* AppDelegate.swift */; };
 		A4D8C6F4271FEC5A003A7521 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D8C6F3271FEC5A003A7521 /* SceneDelegate.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4BF392BF285074C6007ECE05 /* goods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = goods.swift; sourceTree = "<group>"; };
 		A482F768272927EC00F9BFA9 /* hensyuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hensyuViewController.swift; sourceTree = "<group>"; };
 		A4D8C6EE271FEC5A003A7521 /* goodsAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = goodsAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4D8C6F1271FEC5A003A7521 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				A4D8C6FA271FEC5C003A7521 /* Assets.xcassets */,
 				A4D8C6FC271FEC5C003A7521 /* LaunchScreen.storyboard */,
 				A4D8C6FF271FEC5C003A7521 /* Info.plist */,
+				4BF392BF285074C6007ECE05 /* goods.swift */,
 			);
 			path = goodsAPP;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				A4D8C6F6271FEC5A003A7521 /* ViewController.swift in Sources */,
 				A4D8C6F2271FEC5A003A7521 /* AppDelegate.swift in Sources */,
 				A4D8C6F4271FEC5A003A7521 /* SceneDelegate.swift in Sources */,
+				4BF392C0285074C6007ECE05 /* goods.swift in Sources */,
 				AE6C1E1C274CBA0B0025D8B3 /* AddCellViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
