@@ -102,8 +102,12 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
     
     // 各cellの詳細モーダル
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        cellNum = indexPath.row
         // 編集モーダルに遷移する
         performSegue(withIdentifier: "toHensyu", sender: nil)
+        
+
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
         print(gNameArray.count)
@@ -111,6 +115,7 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
         numArray.remove(at: indexPath.row)
         imageNameArray.remove(at: indexPath.row)
         //        myTableView.deleteRows(at: [indexPath], with: .fade)
+        
         
         
     }

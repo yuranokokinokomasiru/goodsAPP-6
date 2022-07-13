@@ -17,6 +17,8 @@ class AddCellViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     var numArray = [String]() // グッズの数を入れる配列
     var imageNameArray = [NSData]() // グッズのイメージを入れる配列
     var cellNum:Int! // 選択されたcellのNumberを入れる変数
+    
+    var selectData: NSData? = nil
 
     @IBOutlet var titleTextField: UITextField! // タイトルを入力するTextField
     @IBOutlet var numberTextField: UITextField! // 個数を入力するTextField
@@ -47,6 +49,7 @@ class AddCellViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         // 入力されたテキストを各配列に格納する
         gNameArray.append(titleTextField.text!)
         numArray.append(numberTextField.text!)
+        imageNameArray.append(selectData!)
         
         // UserDeafultsに追加された配列を保存する
         saveData.set(gNameArray, forKey: "udNameArray")
@@ -76,11 +79,12 @@ class AddCellViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         let data = image.pngData()! as NSData
 
         // グッズの画像を保存する配列に追加する
-        imageNameArray.append(data)
+//        imageNameArray.append(data)
+        selectData = data
         // UserDefaultsにグッズの画像が保存された配列を保存する
-        saveData.set(imageNameArray, forKey: "udImageNameArray")
+//        saveData.set(imageNameArray, forKey: "udImageNameArray")
         // テーブルの情報を更新する
-        table.reloadData()
+//        table.reloadData()
         
         self.dismiss(animated: true, completion: nil)
     }
