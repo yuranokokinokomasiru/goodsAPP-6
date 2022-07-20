@@ -13,12 +13,10 @@ class AddCellViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     
     var saveData : UserDefaults!
     
-    var gNameArray = [String]() // グッズの名前を入れる配列
-    var numArray = [String]() // グッズの数を入れる配列
-    var imageNameArray = [NSData]() // グッズのイメージを入れる配列
     var cellNum:Int! // 選択されたcellのNumberを入れる変数
     
     var selectData: NSData? = nil
+    var goodArray = [GoodsData]()
 
     @IBOutlet var titleTextField: UITextField! // タイトルを入力するTextField
     @IBOutlet var numberTextField: UITextField! // 個数を入力するTextField
@@ -28,7 +26,6 @@ class AddCellViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         super.viewDidLoad()
 
         titleTextField.delegate = self
-        
         numberTextField.delegate = self
         
     }
@@ -40,21 +37,37 @@ class AddCellViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     
     // 追加ボタン
     @IBAction func add() {
+        let jsonDecoder = JSONDecoder()
+        guard let data = UserDefaults.standard.data(forKey: "udGoodsArray"),
+              let decodeData = try? jsonDecoder.decode([GoodsData].self, from: data) else {
+            return
+        }
+        goodArray = decodeData
         
+        let goods = GoodsData(name: titleTextField.text!, num: Int(numberTextField.text!) ?? 0, image: selectData! as Data)
+        
+        goodArray.append(goods)
+        
+        // UserDefaultsにグッズの画像が保存された配列を保存する
+        let jsonEncoder = JSONEncoder()
+        guard let data = try? jsonEncoder.encode(goodArray) else {
+            return
+        }
+        UserDefaults.standard.set(data, forKey: "udGoodsArray")
         // UserDefaultsに保存されているデータを取得して、フィールド変数に代入する
-        gNameArray = (saveData.object(forKey: "udNameArray") as? [String])!
-        numArray = (saveData.object(forKey: "udNumArray") as? [String])!
-        imageNameArray = (saveData.object(forKey: "udImageNameArray") as? [NSData])!
+//        gNameArray = (saveData.object(forKey: "udNameArray") as? [String])!
+//        numArray = (saveData.object(forKey: "udNumArray") as? [String])!
+//        imageNameArray = (saveData.object(forKey: "udImageNameArray") as? [NSData])!
         
         // 入力されたテキストを各配列に格納する
-        gNameArray.append(titleTextField.text!)
-        numArray.append(numberTextField.text!)
-        imageNameArray.append(selectData!)
-        
-        // UserDeafultsに追加された配列を保存する
-        saveData.set(gNameArray, forKey: "udNameArray")
-        saveData.set(numArray, forKey: "udNumArray")
-        saveData.set(imageNameArray, forKey: "udImageNameArray")
+//        gNameArray.append(titleTextField.text!)
+//        numArray.append(numberTextField.text!)
+//        imageNameArray.append(selectData!)
+//
+//        // UserDeafultsに追加された配列を保存する
+//        saveData.set(gNameArray, forKey: "udNameArray")
+//        saveData.set(numArray, forKey: "udNumArray")
+//        saveData.set(imageNameArray, forKey: "udImageNameArray")
         
         // テーブルの情報を更新する
         table.reloadData()
@@ -92,8 +105,10 @@ class AddCellViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextVC = segue.destination as! ViewController
         
-        nextVC.gNameArray = gNameArray
-        nextVC.numArray = numArray
+//        nextVC.gNameArray = gNameArray
+//        nextVC.numArray = numArray
+        nextVC.goodArray = goodArray
+        nextVC.table.reloadData()
         // ViewControllerにsaveDataの値を渡す
         nextVC.saveData = saveData
     }

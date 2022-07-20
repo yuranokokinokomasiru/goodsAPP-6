@@ -16,17 +16,14 @@ class hensyuViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var numberTextField: UITextField!
     
-    //    var gNameArray = [String]() // グッズの名前を入れる配列
-    //    var numArray = [String]() // グッズの数を入れる配列
     var cellNum:Int! // 選択されたcellのNumberを入れる変数
-    //    var imageNameArray = [NSData]() // グッズのイメージを入れる配列
-    
     var goodArray = [GoodsData]()
     
     // 編集画面が表示された時
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(cellNum)
         // テーブルの情報を更新する
         table.reloadData()
         
@@ -45,7 +42,7 @@ class hensyuViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         titleTextField.text = goodArray[cellNum].name
         
         // 編集するnumberTextFieldに選択したグッズの数を表示する
-        numberTextField.text = String(goodArray[cellNum].num )
+        numberTextField.text = String(goodArray[cellNum].num)
     }
     
     // 戻るボタン
