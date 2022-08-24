@@ -110,7 +110,7 @@ class AddCellViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         nextVC.goodArray = goodArray
         nextVC.table.reloadData()
         // ViewControllerにsaveDataの値を渡す
-        nextVC.saveData = saveData
+//        nextVC.saveData = saveData
     }
 
     // Enter押したときに自動的にキーボードを閉じる
