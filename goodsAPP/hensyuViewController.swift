@@ -9,7 +9,7 @@ import UIKit
 
 class hensyuViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
-    var saveData : UserDefaults!
+    var saveData : UserDefaults! = UserDefaults.standard
     
     var table: UITableView!
     
@@ -25,22 +25,23 @@ class hensyuViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
         print(cellNum)
         // テーブルの情報を更新する
-        table.reloadData()
+//        table.reloadData()
         
         titleTextField.delegate = self
         
         numberTextField.delegate = self
-        
+        print(goodArray)
         // UserDefaultsに保存されているデータを取得して、フィールド変数に代入する
         let jsonDecoder = JSONDecoder()
         guard let data = UserDefaults.standard.data(forKey: "udGoodsArray"),
               let decodeData = try? jsonDecoder.decode([GoodsData].self, from: data) else {
+            print(goodArray[cellNum])
             return
         }
         goodArray = decodeData
         // 編集するtitleTextFieldに選択したグッズのタイトルを表示する
         titleTextField.text = goodArray[cellNum].name
-        
+        print(goodArray[cellNum])
         // 編集するnumberTextFieldに選択したグッズの数を表示する
         numberTextField.text = String(goodArray[cellNum].num)
     }
@@ -64,7 +65,7 @@ class hensyuViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         UserDefaults.standard.set(data, forKey: "udGoodsArray")
         
         // テーブルの情報を更新する
-        table.reloadData()
+//        table.reloadData()
         
         // モーダルを閉じる
         dismiss(animated: true, completion: nil)
@@ -93,7 +94,7 @@ class hensyuViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         }
         UserDefaults.standard.set(data, forKey: "udGoodsArray")
         
-        table.reloadData()
+//        table.reloadData()
         
         self.dismiss(animated: true, completion: nil)
     }

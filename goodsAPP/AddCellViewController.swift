@@ -7,11 +7,13 @@
 
 import UIKit
 
+let udGoodArrayKey = "udGoodArray"
+
 class AddCellViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var table: UITableView!
     
-    var saveData : UserDefaults!
+    var saveData : UserDefaults! = UserDefaults.standard
     
     var cellNum:Int! // 選択されたcellのNumberを入れる変数
     
@@ -37,13 +39,14 @@ class AddCellViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     
     // 追加ボタン
     @IBAction func add() {
+        if(saveData.object(forKey: udGoodArrayKey) != nil){
         let jsonDecoder = JSONDecoder()
-        guard let data = UserDefaults.standard.data(forKey: "udGoodsArray"),
+        guard let data = UserDefaults.standard.data(forKey: udGoodArrayKey),
               let decodeData = try? jsonDecoder.decode([GoodsData].self, from: data) else {
             return
         }
         goodArray = decodeData
-        
+        }
         let goods = GoodsData(name: titleTextField.text!, num: Int(numberTextField.text!) ?? 0, image: selectData! as Data)
         
         goodArray.append(goods)
@@ -53,7 +56,7 @@ class AddCellViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         guard let data = try? jsonEncoder.encode(goodArray) else {
             return
         }
-        UserDefaults.standard.set(data, forKey: "udGoodsArray")
+        UserDefaults.standard.set(data, forKey: udGoodArrayKey)
         // UserDefaultsに保存されているデータを取得して、フィールド変数に代入する
 //        gNameArray = (saveData.object(forKey: "udNameArray") as? [String])!
 //        numArray = (saveData.object(forKey: "udNumArray") as? [String])!
@@ -70,7 +73,7 @@ class AddCellViewController: UIViewController, UITextFieldDelegate, UIImagePicke
 //        saveData.set(imageNameArray, forKey: "udImageNameArray")
         
         // テーブルの情報を更新する
-        table.reloadData()
+//        table.reloadData()
         
         // モーダルを閉じる
         dismiss(animated: true, completion: nil)
